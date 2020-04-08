@@ -2,16 +2,17 @@
 #include <random>
 #include <chrono>
 
-//Г‚Г Г°ГЁГ Г­ГІ 24, Г±Г®Г°ГІГЁГ°Г®ГўГЄГ  Г¬ГҐГІГ®Г¤Г®Г¬ ГГҐГ«Г«Г  + ГўГ Г°ГЁГ Г­ГІ 25 Г±Г®Г°ГІГЁГ°Г®ГўГЄГ  ГЇГ°Г®Г±ГІГ»Г¬ ГўГ»ГЎГ®Г°Г®Г¬
+//Вариант 24, сортировка методом Шелла + вариант 25 сортировка простым выбором
 template<typename Type>
-Type RandomNum(const Type minNum, const Type maxNum) //ГѓГҐГ­ГҐГ°Г ГІГ®Г° Г°Г ГўГ­Г®Г¬ГҐГ°Г­Г® Г°Г Г±ГЇГ°ГҐГ¤ГҐГ«ГҐГ­Г­Г»Гµ ГЇГ±ГҐГўГ¤Г®Г±Г«ГіГ·Г Г©Г­Г»Гµ Г·ГЁГ±ГҐГ« Гў Г§Г Г¤Г Г­Г­Г®Г¬ Г¤ГЁГ ГЇГ Г§Г®Г­ГҐ.
+Type RandomNum(const Type minNum, const Type maxNum) //Генератор равномерно распределенных псевдослучайных чисел в заданном диапазоне.
 {
-	static std::mt19937 generator(std::random_device{}());//Г‘Г®Г§Г¤Г Г­ГЁГҐ "Г§ГҐГ°Г­Г " ГЁ ГЈГҐГ­ГҐГ°Г Г¶ГЁГї ГЇГ±ГҐГўГ¤Г®Г±Г«ГіГ·Г Г©Г­Г®ГЈГ® Г·ГЁГ±Г«Г  Г± ГЇГ®Г¬Г®Г№ГјГѕ ГўГЁГµГ°Гї ГЊГҐГ°Г±ГҐГ­Г­Г 
+	static std::mt19937 generator(std::random_device{}());//Создание "зерна" и генерация псевдослучайного числа с помощью вихря Мерсенна
 
 	if (minNum > maxNum) {
-		return std::uniform_int_distribution<Type>(maxNum, minNum)(generator); //ГЏГ°ГЁГўГҐГ¤ГҐГ­ГЁГҐ ГЇГ±ГҐГўГ¤Г®Г±Г«ГіГ·Г Г©Г­Г®ГЈГ® Г·ГЁГ±Г«Г  ГЄ Г­ГіГ¦Г­Г®Г¬Гі ГЁГ­ГІГҐГ°ГўГ Г«Гі Гў Г±Г®Г®ГІГўГҐГІГ±ГІГўГЁГЁ Г± Г­Г®Г°Г¬Г Г«ГјГ­Г»Г¬ Г°Г Г±ГЇГ°ГҐГ¤ГҐГ«ГҐГ­ГЁГҐГ¬
+		return std::uniform_int_distribution<Type>(maxNum, minNum)(generator); //Приведение псевдослучайного числа к нужному интервалу в соответствии с нормальным распределением
 	}
 	else return std::uniform_int_distribution<Type>(minNum, maxNum)(generator); 
+
 }
 
 template<typename ArrType, typename LenType>
@@ -54,17 +55,17 @@ void SelectionSort(ArrType* array, const LenType length) {
 }
 
 int main()
-{	//ГѓГ°Г Г­ГЁГ¶Г» ГЈГҐГ­ГҐГ°Г Г¶ГЁГЁ Г±Г«ГіГ·Г Г©Г­Г»Гµ Г·ГЁГ±ГҐГ« ГЁ Г¤Г«ГЁГ­Г  Г¬Г Г±Г±ГЁГўГ 
+{	//Границы генерации случайных чисел и длина массива
 	const int MIN = 0;
 	const int MAX = 100;
 	const int LENGTH = 10000;
 
-	//ГЋГЎГєГїГўГ«ГҐГ­ГЁГҐ ГІГ®Г·ГҐГЄ Г­Г Г·Г Г«Г  ГЁ ГЄГ®Г­Г¶Г  Г°Г ГЎГ®ГІГ» Г Г«ГЈГ®Г°ГЁГІГ¬Г 
+	//Объявление точек начала и конца работы алгоритма
 	std::chrono::time_point<std::chrono::system_clock> startTime, endTime;
 
 	int array[LENGTH];
 
-	//Г‡Г ГЇГ®Г«Г­ГҐГ­ГЁГҐ Г¬Г Г±Г±ГЁГўГ  ГЇГ±ГҐГўГ¤Г®Г±Г«ГіГ·Г Г©Г­Г»Г¬ГЁ Г·ГЁГ±Г«Г Г¬ГЁ, Г­Г Г·Г Г«Г® ГІГҐГ±ГІГ  Г±Г®Г°ГІГЁГ°Г®ГўГЄГЁ Г¬ГҐГІГ®Г¤Г®Г¬ ГГҐГ«Г«Г 
+	//Заполнение массива псевдослучайными числами, начало теста сортировки методом Шелла
 	for (int i = 0; i < LENGTH; ++i)
 	{
 		array[i] = RandomNum(MIN, MAX);
@@ -78,7 +79,7 @@ int main()
 
 	std::cout << "\nDuration: " << std::chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime).count() << "ms \n";
 
-	//Г­Г Г·Г Г«Г® ГІГҐГ±ГІГ  Г±Г®Г°ГІГЁГ°Г®ГўГЄГЁ ГЇГ°Г®Г±ГІГ»Г¬ ГўГ»ГЎГ®Г°Г®Г¬
+	//начало теста сортировки простым выбором
 	for (int i = 0; i < LENGTH; ++i)
 	{
 		array[i] = RandomNum(MIN, MAX);

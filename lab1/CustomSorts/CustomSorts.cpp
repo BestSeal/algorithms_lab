@@ -15,35 +15,28 @@ Type RandomNum(const Type minNum, const Type maxNum) //Генератор рав
 
 }
 
+//Метод Шелла
 template<typename ArrType, typename LenType>
 void ShellSort(ArrType* array, const LenType length) {
-	LenType j = 0;
-	bool ayversonCond;
-	for (auto step = length / 2; step > 1; step /= 2)
-		for (auto i = 0; i + step < length; ++i)
-			if (array[i] > array[i + step]) {
-				std::swap(array[i], array[i + step]);
-			}
 
-	for (auto j = 0; j < length; ++j) {
-		ayversonCond = false;
-		for (auto i = 0; i < length - j - 1; ++i) {
-			if (array[i] > array[i + 1]) {
-				ayversonCond = true;
-				std::swap(array[i], array[i + 1]);
-			}
-
-		}
-		if (!ayversonCond) break;
-	}
+	//Сравнение элементов на дистанции шага step, при step = 1 вырождается в сортировку вставками
+	for (auto step = length / 2; step > 0; step /= 2)
+		for (auto i = step; i < length; ++i)
+			for (auto j = i - step; j >= 0 && array[j] > array[j + step]; j -= step) 
+				std::swap(array[j], array[j + step]);
 }
 
+//Сортировка выбором
 template<typename ArrType, typename LenType>
 void SelectionSort(ArrType* array, const LenType length) {
 	ArrType min, ind;
-	for (auto i = 0; i < length; ++i) {
+
+	//Перебор элементов от 0 до length
+	for (auto i = 0; i < length; ++i) { 
 		min = array[i];
 		ind = i;
+
+		//Поиск минимума от i до length и его размещение на i-ом месте
 		for (auto j = i; j < length; ++j) {
 			if (min > array[j]) {
 				min = array[j];
@@ -55,43 +48,51 @@ void SelectionSort(ArrType* array, const LenType length) {
 }
 
 int main()
-{	//Границы генерации случайных чисел и длина массива
+{	
+	//Границы генерации случайных чисел и длина массива
 	const int MIN = 0;
 	const int MAX = 100;
-	const int LENGTH = 10000;
+	const int SHELL[3] = { 1600, 2800, 8800 };
+	const int SELECTION[3] = { 2200,3400,7200 };
 
 	//Объявление точек начала и конца работы алгоритма
 	std::chrono::time_point<std::chrono::system_clock> startTime, endTime;
+	
+	std::cout << "Shell sort\n";
+	for (auto j : SHELL) {
 
-	int array[LENGTH];
+		//Заполнение массива псевдослучайными числами, начало теста сортировки методом Шелла
+		int* array = new int[j];
+		for (int i = 0; i < j; ++i)
+		{
+			array[i] = RandomNum(MIN, MAX);
+		}
 
-	//Заполнение массива псевдослучайными числами, начало теста сортировки методом Шелла
-	for (int i = 0; i < LENGTH; ++i)
-	{
-		array[i] = RandomNum(MIN, MAX);
+		startTime = std::chrono::system_clock::now();
+
+		ShellSort(array, j);
+
+		endTime = std::chrono::system_clock::now();
+		delete[] array;
+		std::cout << " Number of elemments:" << j << " Duration: " << std::chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime).count() << "ms \n";
 	}
-
-	startTime = std::chrono::system_clock::now();
-
-	ShellSort(array, LENGTH);
-
-	endTime = std::chrono::system_clock::now();
-
-	std::cout << "\nDuration: " << std::chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime).count() << "ms \n";
 
 	//начало теста сортировки простым выбором
-	for (int i = 0; i < LENGTH; ++i)
-	{
-		array[i] = RandomNum(MIN, MAX);
+	std::cout << "\nSelection sort\n";
+	for (auto j : SELECTION) {
+		int* array = new int[j];
+		for (int i = 0; i < j; ++i)
+		{
+			array[i] = RandomNum(MIN, MAX);
+		}
+
+		startTime = std::chrono::system_clock::now();
+
+		SelectionSort(array, j);
+
+		endTime = std::chrono::system_clock::now();
+		delete[] array;
+		std::cout << " Number of elemments:" << j << " Duration: " << std::chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime).count() << "ms \n";
 	}
-
-	startTime = std::chrono::system_clock::now();
-
-	SelectionSort(array, LENGTH);
-
-	endTime = std::chrono::system_clock::now();
-
-	std::cout << "\nDuration: " << std::chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime).count() << "ms \n";
-
 
 }

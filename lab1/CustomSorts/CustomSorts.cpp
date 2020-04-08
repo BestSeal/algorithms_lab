@@ -69,7 +69,6 @@ int main()
 	for (int i = 0; i < LENGTH; ++i)
 	{
 		array[i] = RandomNum(MIN, MAX);
-		//std::cout << array[i] << " ";
 	}
 
 	startTime = std::chrono::system_clock::now();
@@ -84,7 +83,6 @@ int main()
 	for (int i = 0; i < LENGTH; ++i)
 	{
 		array[i] = RandomNum(MIN, MAX);
-		//std::cout << array[i] << " ";
 	}
 
 	startTime = std::chrono::system_clock::now();

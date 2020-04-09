@@ -94,5 +94,4 @@ int main()
 		delete[] array;
 		std::cout << " Number of elemments:" << j << " Duration: " << std::chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime).count() << "ms \n";
 	}
-
 }

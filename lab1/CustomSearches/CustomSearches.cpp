@@ -1,8 +1,8 @@
 #include <iostream>
 #include <chrono>
 
-//#include "BinTree.h"
 #include "CustomSorts.cpp"
+#include "BinTree.h"
 
 int main()
 {
@@ -13,9 +13,11 @@ int main()
         values[i] = customsorts::RandomNum(0, 100);
     }
 
-    customsorts::ShellSort(values, LENGTH);
+    bintree::BinTree(values, LENGTH);
 
     for (auto i : values) {
         std::cout << i << " ";
     }
+
+    
 }

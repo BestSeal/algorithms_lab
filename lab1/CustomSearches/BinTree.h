@@ -1,36 +1,62 @@
-#ifndef BINTREEE_H_INCLUDED
-#define BINTREEE_H_INCLUDED
+#pragma once
+
 namespace bintree {
-	//нет балансировки дерева т.к. в задании было оговорено, что исключается сбалансированное дерево
+	class Node
+
+	{
+		int value;
+		Node* left;
+		Node* right;
+		Node* parent;
+
+	public:
+
+		Node(const int value, Node* parent, Node* left, Node* right);
+
+		//Р’РѕР·РІСЂР°С‰Р°РµС‚ Р·РЅР°С‡РµРЅРёРµ СЌР»РµРјРµРЅС‚Р°
+		int GetValue();
+
+		//Р’РѕР·РІСЂР°С‰Р°СЋС‚ СЃРѕРѕС‚РІРµС‚СЃРІСѓСЋС‰РёРµ СѓРєР°Р·Р°С‚РµР»Рё РЅР° СЌР»РµРјРµРЅС‚С‹
+		Node* GetLeft() const;
+		Node* GetRight() const;
+		Node* GetParent() const;
+
+		//Р—Р°РґР°СЋС‚ СЃРѕРѕС‚РІРµС‚СЃРІСѓСЋС‰РёРµ СѓРєР°Р·Р°С‚РµР»Рё РЅР° СЌР»РµРјРµРЅС‚С‹
+		void SetLeft(Node* left);
+		void SetRight(Node* right);
+		void SetParent(Node* parent);
+
+	};
+
 	class BinTree {
 
 		int numOfElements;
-		//Element* root;
+		Node* root;
 
 	public:
 
-		BinTree();
-		int getNumOfElements();
-		//возвращает true, если элемент был успешно добавлен и false иначе
-		bool addElement(int value);
-		//возвращает true, если элемент был успешно удален и false иначе
-		bool deleteElement(int value);
-		//возвращает true, если элемент был успешно найден и false иначе
-		bool isElementHere(int value);
+		BinTree(int* values, const int length);
+
+		//Р’РѕР·РІСЂР°С‰Р°РµС‚ РєРѕР»РёС‡РµСЃС‚РІРѕ СЌР»РµРјРµРЅС‚РѕРІ
+		int GetNumOfElements() const;
+		//РЈРјРµРЅСЊС€РёС‚СЊ РёР»Рё СѓРІРµР»РёС‡РёС‚СЊ РєРѕР»-РІРѕ СЌР»РµРјРµРЅС‚РѕРІ РґРµСЂРµРІР°
+		void IncNumOfElements();
+		void DecNumOfElements();
+
+		//Р”РѕР±Р°РІР»СЏРµС‚ СЌР»РµРјРµРЅС‚
+		void AddElement(const int value);
+
+		//Р’РѕР·РІСЂР°С‰Р°РµС‚ true, РµСЃР»Рё СЌР»РµРјРµРЅС‚ Р±С‹Р» СѓСЃРїРµС€РЅРѕ СѓРґР°Р»РµРЅ Рё false, РµСЃР»Рё СЌР»РµРјРµРЅС‚ РЅРµ СЃСѓС‰РµСЃС‚РІСѓРµС‚
+		bool DeleteElement(const int value);
+
+		//Р’РѕР·РІСЂР°С‰Р°РµС‚ true, РµСЃР»Рё СЌР»РµРјРµРЅС‚ Р±С‹Р» СѓСЃРїРµС€РЅРѕ РЅР°Р№РґРµРЅ Рё false, РµСЃР»Рё СЌР»РµРјРµРЅС‚ РЅРµ СЃСѓС‰РµСЃС‚РІСѓРµС‚
+		bool IsContaining(const int value) const;
+
+		//Р—Р°РґР°С‘С‚ РєРѕСЂРЅРµРІРѕР№ СЌР»РµРјРµРЅС‚
+		void SetRoot(Node* root);
 
 	};
 
-	class Element: public BinTree
-	{
-		int value;
-		Element* left;
-		Element* right;
-		Element* parent;
-
-	public:
-
-		Element(int value);
-
-	};
+	
 }
-#endif
+

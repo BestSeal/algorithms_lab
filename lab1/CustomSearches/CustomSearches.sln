@@ -5,6 +5,11 @@ VisualStudioVersion = 16.0.30002.166
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CustomSearches", "CustomSearches.vcxproj", "{6D15FAFC-08B6-40A7-9E7F-F030BF8D8948}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4A73F5ED-2B6F-45A9-ACBF-072AABBE8C38}"
+	ProjectSection(SolutionItems) = preProject
+		CustomSorts.cpp = CustomSorts.cpp
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64

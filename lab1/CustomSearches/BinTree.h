@@ -5,7 +5,7 @@ namespace bintree {
 	class BinTree {
 
 		int numOfElements;
-		Element* root;
+		//Element* root;
 
 	public:
 

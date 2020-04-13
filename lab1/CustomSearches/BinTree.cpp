@@ -3,6 +3,7 @@
 
 //Просто сеттеры/геттеры
 int bintree::Node::GetValue() const{
+
 	return this->value;
 }
 
@@ -163,6 +164,7 @@ void bintree::BinTree::AddElement(const int value) {
 }
 
 bool bintree::BinTree::DeleteElement(const int value) {
+	std::cout << "Delete number " << value << "\n";
 	//Находим указатель на удаляемый элемент
 	Node* toDelete = this->Searh(value);
 	if (toDelete != nullptr){

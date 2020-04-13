@@ -20,9 +20,9 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
-    <ProjectGuid>{6A7247DB-00B2-4D31-A2C5-D6BA46C44A95}</ProjectGuid>
+    <ProjectGuid>{0E05D7FB-EDF4-4661-83C3-29B0A2FA0845}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>CustomSearches</RootNamespace>
+    <RootNamespace>Hash</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -147,12 +147,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="BinTree.cpp" />
-    <ClCompile Include="CustomSearches.cpp" />
     <ClCompile Include="CustomSorts.cpp" />
+    <ClCompile Include="Hash.cpp" />
+    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BinTree.h" />
+    <ClInclude Include="Hash.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

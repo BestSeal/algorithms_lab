@@ -1,11 +1,14 @@
 #include <iostream>
 #include <chrono>
 
-#include "CustomSorts.cpp"
 #include "BinTree.h"
+//#include "SearchByHash.cpp"
+#include "CustomSorts.cpp"
 
 int main()
-{   //Пример отсортированном массиве 
+{   
+    //Бинарное дерево поиска
+    //Пример отсортированном массиве 
     const int LENGTH = 10;
     int values[LENGTH];
 
@@ -23,16 +26,16 @@ int main()
     std::cout << "\n";
 
     for (auto i : values) {
-        std::cout << "Is tree containing " << i << "? - " << sortedInput->IsContaining(i) << "\n";
+        std::cout << "Is tree containing " << i << "?  " << sortedInput->IsContaining(i) << "\n";
     };
     //Удаление элемента 
     sortedInput->DeleteElement(values[6]);
 
-    std::cout << "Is tree containing " << values[6] << "? - " << sortedInput->IsContaining(values[6]) << "\n";
+    std::cout << "Is tree containing " << values[6] << "?  " << sortedInput->IsContaining(values[6]) << "\n";
     sortedInput->InorderTreePrint(sortedInput->GetRoot());
     std::cout << "\n";
     sortedInput->DeleteElement(values[0]);
-    std::cout << "Is tree containing " << values[0] << "? - " << sortedInput->IsContaining(values[0]) << "\n";
+    std::cout << "Is tree containing " << values[0] << "?  " << sortedInput->IsContaining(values[0]) << "\n";
     sortedInput->InorderTreePrint(sortedInput->GetRoot());
     std::cout << "\n";
     delete sortedInput;
@@ -49,5 +52,8 @@ int main()
     preorderInput->PreorderTreePrint(preorderInput->GetRoot());
     std::cout << "\n";
 
+    std::cout << "Is tree containing " << 2 << "?  " << preorderInput->IsContaining(2) << "\n";
+    preorderInput->InorderTreePrint(preorderInput->GetRoot());
+    std::cout << "\n";
 
 }

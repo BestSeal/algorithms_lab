@@ -69,4 +69,3 @@ namespace bintree {
 		void InorderTreePrint(const Node* node) const;
 	};
 }
-

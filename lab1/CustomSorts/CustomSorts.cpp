@@ -1,4 +1,4 @@
-﻿#include <iostream> 
+#include <iostream> 
 #include <random>
 namespace customsorts {
 
@@ -8,7 +8,7 @@ namespace customsorts {
 		static std::mt19937 generator(std::random_device{}());//Создание "зерна" и генерация псевдослучайного числа с помощью вихря Мерсенна
 
 		if (minNum > maxNum) {
-			return std::uniform_int_distribution<Type>(maxNum, minNum)(generator); //Приведение псевдослучайного числа к нужному интервалу в соответствии с нормальным распределением
+			return std::uniform_int_distribution<Type>(maxNum, minNum)(generator); //Приведение псевдослучайного числа к нужному интервалу в соответствии с равномерным распределением
 		}
 		else return std::uniform_int_distribution<Type>(minNum, maxNum)(generator);
 
